@@ -13,12 +13,26 @@ import fetcher from "~/shared/fetcher";
 import Link from "next/link";
 import TripCard from "~/components/TripCard";
 
+/* 
+  TODO
+  - [ ] Add route page
+  - [ ] Add vehicle page
+  - [ ] Register Page
+  - [ ] Login Page
+  - [ ] Payment(EMPLOYEE) Page
+  - [ ] Cards(EMPLOYEE) Page
+  - [ ] Add new card button to user
+  - [ ] User index page which contains card and payment information
+  - [ ] Provide a ranking for drivers descending by the number of total completed trips
+  - [ ] Provide a ranking for vehicles descending by the number of total completed trips
+*/
+
 const Home: NextPage = () => {
   const [trips, setTrips] = useState([]);
   const [users, setUsers] = useState(0);
   const [vehicles, setVehicles] = useState(0);
-  const [payments, setPayments] = useState(0);
-  const [stations, setStations] = useState(0);
+  const [payments, setPayments] = useState("");
+  const [routes, setRoutes] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -26,8 +40,14 @@ const Home: NextPage = () => {
         setTrips(await fetcher("/api/trips?type=MAINPAGE")),
         setUsers(await fetcher("/api/users?count=true")),
         setVehicles(await fetcher("/api/vehicles?count=true")),
-        setPayments(await fetcher("/api/payments?count=true")),
-        setStations(await fetcher("/api/stations?count=true")),
+        setPayments(
+          await fetcher("/api/payments?type=income").then((res) => res[0].total)
+        ),
+        setRoutes(
+          await fetcher("/api/routes?type=count").then(
+            (res) => res[0].route_count
+          )
+        ),
       ]);
     })();
   }, []);
@@ -46,9 +66,9 @@ const Home: NextPage = () => {
               value={users}
             />
             <StatCard
-              title="Payments"
+              title="Income"
               icon={<IoMdCard className="h-8 w-8 text-orange-400" />}
-              value={payments}
+              value={"$" + payments}
             />
             <StatCard
               title="Vehicle"
@@ -56,9 +76,9 @@ const Home: NextPage = () => {
               value={vehicles}
             />
             <StatCard
-              title="Stations"
+              title="Routes"
               icon={<CiRoute className="h-8 w-8 text-orange-400" />}
-              value={stations}
+              value={routes}
             />
           </div>
           <div className="mb-2 mt-6 flex items-center justify-between">

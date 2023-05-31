@@ -12,23 +12,29 @@ const Navbar = (props: Props) => {
         </Link>
 
         <div className=" flex items-center gap-x-8 ">
-          <Link href={"/trip"}>
-            <span className="text-xl hover:text-orange-600">Employee</span>
+          <Link href={"/departments"}>
+            <span className="text-xl hover:text-orange-600">Departments</span>
+          </Link>
+          <Link href={"/employee"}>
+            <span className="text-xl hover:text-orange-600">Employees</span>
+          </Link>
+          <Link href={"/routes"}>
+            <span className="text-xl hover:text-orange-600">Routes</span>
           </Link>
           <Link href={"/trip"}>
-            <span className="text-xl hover:text-orange-600">Trip</span>
+            <span className="text-xl hover:text-orange-600">Trips</span>
           </Link>
           <Link href={"/vehicle"}>
-            <span className="text-xl hover:text-orange-600">Vehicle</span>
+            <span className="text-xl hover:text-orange-600">Vehicles</span>
           </Link>
           <Link href={"/user"}>
-            <span className="text-xl hover:text-orange-600">User</span>
+            <span className="text-xl hover:text-orange-600">Users</span>
           </Link>
           <Link href={"/"}>
-            <span className="text-xl hover:text-orange-600">Payment</span>
+            <span className="text-xl hover:text-orange-600">Payments</span>
           </Link>
           <Link href={"/"}>
-            <span className="text-xl hover:text-orange-600">Card</span>
+            <span className="text-xl hover:text-orange-600">Cards</span>
           </Link>
         </div>
       </div>

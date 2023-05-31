@@ -29,7 +29,7 @@ const CreateTrip = (props: Props) => {
     (async () => {
       setVehicles(await fetcher("/api/vehicles?type=TRANSPORT"));
       setRoutes(await fetcher("/api/routes"));
-      setEmployees(await fetcher("/api/employees"));
+      setEmployees(await fetcher("/api/employees?department_id=0"));
     })();
   }, []);
 
