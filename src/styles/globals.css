@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.title {
+  @apply text-xl font-[300] text-orange-600;
+}
+
+html,
+body {
+  padding: 0;
+  /* background: rgb(23, 23, 23); */
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
