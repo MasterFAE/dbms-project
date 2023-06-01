@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 
 type Props = {
@@ -7,6 +7,13 @@ type Props = {
 };
 
 const Layout = ({ children, width }: Props) => {
+  useEffect(() => {
+    const employeeId = localStorage.getItem("employeeId");
+    if (!employeeId) {
+      window.location.href = "/employee/login";
+    }
+  }, []);
+
   return (
     <main>
       <Navbar />

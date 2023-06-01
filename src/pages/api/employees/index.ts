@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { query } from "~/shared/server/query";
-
+import argon2 from "argon2";
 export default async function handler(req, res) {
   let data;
   switch (req.method) {
@@ -41,10 +41,20 @@ export default async function handler(req, res) {
         department_id: _dep_id,
         gender: _gender,
       } = JSON.parse(req.body);
+      const hashedPassword = await argon2.hash("test123");
       data = await query({
         query:
-          "INSERT INTO employee (department_id, firstName, lastName, ssn, salary, role, gender) VALUES (?, ?, ?, ?, ?, ?, ?)",
-        values: [_dep_id, fn, ln, _ssn, _salary, _role, _gender],
+          "INSERT INTO employee (department_id, firstName, lastName, ssn, salary, role, gender, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        values: [
+          _dep_id,
+          fn,
+          ln,
+          _ssn,
+          _salary,
+          _role,
+          _gender,
+          hashedPassword,
+        ],
       });
       return res.status(200).json(data);
 

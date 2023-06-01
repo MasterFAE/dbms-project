@@ -53,7 +53,7 @@ const Client = (props: Props) => {
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     if (!userId) {
-      window.location.href = "/";
+      window.location.href = "/login";
     } else {
       fetch(`/api/users/${userId}`)
         .then((res) => res.json())
