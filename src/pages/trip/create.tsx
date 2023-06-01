@@ -53,8 +53,7 @@ const CreateTrip = (props: Props) => {
 
   const createTrip = async () => {
     fetch("/api/trips", { method: "POST", body: JSON.stringify(data) }).then(
-      // () => router.push("/trip")
-      console.log
+      () => router.push("/trip")
     );
   };
 

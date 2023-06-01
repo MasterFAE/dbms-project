@@ -6,6 +6,7 @@ import { Employee } from "~/types/employee";
 import users from "../api/users";
 import sortTable from "~/shared/sortTable";
 import { boolean } from "zod";
+import Link from "next/link";
 
 type Props = {};
 
@@ -21,7 +22,7 @@ const Index = (props: Props) => {
     role: "ADMINISTRATOR",
     department_id: -1,
     isUpdating: false,
-  }); // [1
+  });
   const [employees, setEmployees] = useState([]);
   const deleteItem = async (id: number) => {
     await fetch(`/api/employees/${id}`, {
@@ -102,6 +103,20 @@ const Index = (props: Props) => {
     );
   };
 
+  const fetchDriverRanking = async () => {
+    const result = await fetcher("/api/employees?type=driver_ranking");
+    alert(
+      `Driver Ranking: \n${result
+        .map(
+          (employee: Employee, index: number) =>
+            `${index + 1}. ${employee.firstName} ${employee.lastName} - ${
+              employee.total_trips
+            } trips completed.`
+        )
+        .join("\n")}`
+    );
+  };
+
   useEffect(() => {
     (async () => {
       setEmployees(await fetcher("/api/employees"));
@@ -114,19 +129,28 @@ const Index = (props: Props) => {
         <h1 className="my-2 text-center text-xl font-semibold">
           {employees.length} Employees
         </h1>
-        <div className="flex justify-center gap-x-4">
+        <div className="mb-4 flex items-center justify-center gap-x-4">
           <button
-            className="my-4 w-fit bg-orange-400 p-2 text-white"
+            className=" w-fit bg-orange-400 p-2 text-white"
             onClick={calculateAvgSalary}
           >
             Calculate Average Salary
           </button>
           <button
-            className="my-4 w-fit border-2 border-orange-400 p-2 text-orange-400"
+            className=" w-fit border-2 border-orange-400 p-2 text-orange-400"
             onClick={calculateMaxSalary}
           >
             Calculate Maximum Salary
           </button>
+          <button
+            onClick={fetchDriverRanking}
+            className="border-2 border-blue-600 p-2 text-blue-600"
+          >
+            Fetch Driver Ranking
+          </button>
+          <Link href={"/employee/create"}>
+            <button className="addButton p-2">Create</button>
+          </Link>
         </div>
         <table>
           <thead>

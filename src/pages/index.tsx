@@ -14,16 +14,17 @@ import Link from "next/link";
 import TripCard from "~/components/TripCard";
 
 /* 
-  TODO
-  - [ ] Add route page
-  - [ ] Add vehicle page
-  - [ ] Register Page
-  - [ ] Login Page
-  - [ ] Payment(EMPLOYEE) Page
-  - [ ] Cards(EMPLOYEE) Page
-  - [ ] Add new card button to user
-  - [ ] User index page which contains card and payment information
-  - [ ] Provide a ranking for drivers descending by the number of total completed trips
+  TODO:
+  - [X] Add Employee page
+  - [X] Add vehicle page
+  - [X] Register Page
+  - [X] Login Page
+  - [X] Payment(EMPLOYEE) Page
+  - [X] Cards(EMPLOYEE) Page
+  - [X] Add new card button to user
+  - [X] Auto increment vehicle, trips and user, cards
+  - [X] User index page which contains card and payment information
+  - [X] Provide a ranking for drivers descending by the number of total completed trips
   - [ ] Provide a ranking for vehicles descending by the number of total completed trips
 */
 

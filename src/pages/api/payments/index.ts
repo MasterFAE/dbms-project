@@ -11,10 +11,9 @@ export default async function handler(req, res) {
             "SELECT SUM(cost) as total FROM payment WHERE type = 'USAGE' AND status = 'COMPLETED' ",
         });
       } else {
-        // data = await query({
-        //   query:
-        //     "SELECT * FROM employee JOIN department ON `department`.`department_id` = `employee`.`department_id` ORDER BY employee_id DESC ",
-        // });
+        data = await query({
+          query: "SELECT * FROM payment ORDER BY createdAt DESC",
+        });
       }
 
       return res.status(200).json(data);

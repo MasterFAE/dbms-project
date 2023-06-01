@@ -6,6 +6,14 @@
   @apply text-xl font-[300] text-orange-600;
 }
 
+.input {
+  @apply rounded border bg-neutral-50 p-1 px-2 outline-none focus:border-orange-400;
+}
+
+.addButton {
+  @apply rounded bg-blue-600 text-white;
+}
+
 html,
 body {
   padding: 0;

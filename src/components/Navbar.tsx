@@ -30,10 +30,10 @@ const Navbar = (props: Props) => {
           <Link href={"/user"}>
             <span className="text-xl hover:text-orange-600">Users</span>
           </Link>
-          <Link href={"/"}>
+          <Link href={"/payment"}>
             <span className="text-xl hover:text-orange-600">Payments</span>
           </Link>
-          <Link href={"/"}>
+          <Link href={"/card"}>
             <span className="text-xl hover:text-orange-600">Cards</span>
           </Link>
         </div>

@@ -11,10 +11,23 @@ export default async function handler(req, res) {
         return res.status(200).json(result[0]["COUNT(*)"]);
       }
 
-      if (req.query.type) {
+      if (req.query.type == "TRANSPORT") {
         const data = await query({
           query: "SELECT * FROM vehicle WHERE type = ? ORDER BY vehicle_id ",
           values: [req.query.type],
+        });
+        return res.status(200).json(data);
+      } else if (req.query.type == "vehicle_ranking") {
+        const data = await query({
+          query: `SELECT v.vehicle_id, v.manufacturer, v.model, v.year, total_trips
+          FROM (
+              SELECT vehicle_id, COUNT(*) AS total_trips, RANK() OVER (ORDER BY COUNT(*) DESC) AS trip_rank
+              FROM trip
+              WHERE status = 'completed'
+              GROUP BY vehicle_id
+          ) AS r
+          JOIN vehicle v ON v.vehicle_id = r.vehicle_id
+          ORDER BY trip_rank LIMIT 20;`,
         });
         return res.status(200).json(data);
       } else {
@@ -23,5 +36,15 @@ export default async function handler(req, res) {
         });
         return res.status(200).json(data);
       }
+
+    case "POST":
+      const { plate, model, year, color, type, mileage, manufacturer } =
+        JSON.parse(req.body);
+      const result = await query({
+        query:
+          "INSERT INTO vehicle (plate, model, year, color, type, mileage, manufacturer) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        values: [plate, model, year, color, type, mileage, manufacturer],
+      });
+      return res.status(200).json(result);
   }
 }
